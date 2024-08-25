@@ -55,7 +55,7 @@
     - EventBridge
 
 - **Access Management**
-    - Identity & Access Management (IAM)
+    - [Identity & Access Management (IAM)](IAM.md)
     - Cognito
     - Security Token Service (STS)
     - Identity Federation in AWS
@@ -132,7 +132,7 @@
     - Shared Responsibility Model
 
 - **Certification**
-    - AWS Solutions Architect Associate (SAA-C02)
+    - AWS Solutions Architect Associate (SAA-C03)
     - Certificate Validity: 3 years
     - Grading: 100-1000 (passing score = 720) - 72% correct required to pass
     - Pass / Fail Exam (score doesn’t appear on the certificate)
