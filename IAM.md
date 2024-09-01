@@ -79,3 +79,72 @@ Below is an example of a policy that grants specific read-only permissions acros
 - The `Effect` is set to Allow, meaning the specified actions are permitted.
 - The `Action` defines the specific operations that are allowed, such as describing EC2 instances or listing CloudWatch metrics.
 - The `Resource` is set to "*", meaning the actions apply to all resources.
+
+### IAM Policies inheritance
+
+<img src="images/iam/IAM-Policies-Inheritance.PNG" width="auto" height="auto">
+<p>
+
+- **Developers Group:** Alice, Bob, and Charles are part of the Developers group. This group has a policy attached to it that defines specific permissions.
+
+- **Operations Group:** David and Edward are members of the Operations group, which has its own policy.
+
+- **Audit Team:** Charles, who is also a part of the Developers group, belongs to the Audit Team. Similarly, David , who is also a part of the Operations group, belongs to the Audit Team. This team has a different set of permissions defined by another policy.
+
+- **Inline Policies:** Fred has a unique case where he is not part of any group but instead has an inline policy directly attached to him.
+
+> **⚠️ Key Points:**
+>
+> **Multi-Group Membership:** A user can belong to multiple groups, and thus, inherit permissions from multiple policies. This allows for flexibility in defining complex access controls.
+>
+> **Combining Permissions:** When a user is part of more than one group, their effective permissions are a combination of all the policies attached to those groups. This can be both an advantage, allowing for granular control, and a challenge, as it may lead to unintended permissions if not carefully managed.
+>
+> **Inline Policies:** These are policies `directly` attached to an individual user rather than a group. They are specific to the user and not shared or inherited by other users.
+>
+> **Least Privilege Principle:** Even with inheritance, it’s essential to apply the principle of least privilege—granting only the permissions necessary for a user to perform their tasks. Over-permissioning can occur if a user inherits too many permissions from multiple sources.
+
+
+### IAM Policies Structure
+
+When working with AWS Identity and Access Management (IAM), it's essential to understand the structure of IAM policies. These policies are the fundamental building blocks that define permissions and access controls within AWS
+
+<img src="images/iam/IAM-Policies-Structure.PNG" width="auto" height="auto">
+<p>
+
+#### Components of an IAM Policy
+
+An IAM policy is a JSON document that consists of various elements, each serving a specific purpose. Here’s a breakdown of the key components:
+
+1. Version
+    - **Definition:** Specifies the language version of the policy. It's crucial to always include the version element in your policies.
+    - **Value:** `"2012-10-17"` is the most current version and should be used for all new policies.
+
+2. Id (Optional)
+    - **Definition:** An identifier for the policy. This element is optional but can be useful for managing and identifying policies, especially in environments with numerous policies.
+
+3. Statement
+    - **Definition:** The core element of a policy, containing one or more individual statements. Each statement defines a single permission or a set of permissions.
+    - **Structure:** A policy can have multiple statements, each addressing different actions, resources, or conditions.
+
+    - **Components of a Statement** : Each statement within a policy has its own set of components:
+
+        -   **Sid (Optional)**
+            - **Definition:** A unique identifier for the statement. This is optional but can be helpful when managing complex policies with multiple statements.
+
+        -   **Effect**
+            - **Definition:** Specifies whether the statement `allows` or `denies` access.
+            - **Values:** 
+                - `Allow` grants the specified permissions.
+                - `Deny` explicitly blocks the specified permissions.
+  
+        -   **Principal**
+            - **Definition:** Identifies the AWS account, user, or role to which the policy applies. This element is crucial when defining who the policy is for.
+
+        -   **Action**
+            - **Definition:** A list of actions that the policy allows or denies. Actions are operations that can be performed on AWS resources, such as `s3:GetObject` or `ec2:StartInstances`.
+
+        -   **Resource**
+            - **Definition:** Specifies the AWS resources to which the actions apply. This can include specific resources (e.g., an S3 bucket) or a wildcard (`*`) to apply to all resources.
+
+        -   **6. Condition (Optional)**
+            - **Definition:** Specifies the circumstances under which the policy is in effect. Conditions can be used to add granularity, such as allowing access only from a specific IP address range or during a certain time period.
