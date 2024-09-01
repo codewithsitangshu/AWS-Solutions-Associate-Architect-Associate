@@ -106,7 +106,16 @@ Below is an example of a policy that grants specific read-only permissions acros
 
 ### IAM Policies Structure
 
-When working with AWS Identity and Access Management (IAM), it's essential to understand the structure of IAM policies. These policies are the fundamental building blocks that define permissions and access controls within AWS
+When working with AWS Identity and Access Management (IAM), it's essential to understand the structure of IAM policies. These policies are the fundamental building blocks that define permissions and access controls within AWS.
+
+- Policies are JSON documents that outline permissions for users, groups or roles
+
+- Two types
+    - **User based policies**
+        - IAM policies define which API calls should be allowed for a specific user
+    - **Resource based policies*
+        - Control access to an AWS resource
+        - Grant the specified principal permission to perform actions on the resource and define under what conditions this applies
 
 <img src="images/iam/IAM-Policies-Structure.PNG" width="auto" height="auto">
 <p>
@@ -128,23 +137,64 @@ An IAM policy is a JSON document that consists of various elements, each serving
 
     - **Components of a Statement** : Each statement within a policy has its own set of components:
 
-        -   **Sid (Optional)**
+        - **Sid (Optional)**
             - **Definition:** A unique identifier for the statement. This is optional but can be helpful when managing complex policies with multiple statements.
 
-        -   **Effect**
+        - **Effect**
             - **Definition:** Specifies whether the statement `allows` or `denies` access.
             - **Values:** 
                 - `Allow` grants the specified permissions.
                 - `Deny` explicitly blocks the specified permissions.
-  
-        -   **Principal**
+        - **Principal**
             - **Definition:** Identifies the AWS account, user, or role to which the policy applies. This element is crucial when defining who the policy is for.
-
-        -   **Action**
+        - **Action**
             - **Definition:** A list of actions that the policy allows or denies. Actions are operations that can be performed on AWS resources, such as `s3:GetObject` or `ec2:StartInstances`.
-
-        -   **Resource**
+        - **Resource**
             - **Definition:** Specifies the AWS resources to which the actions apply. This can include specific resources (e.g., an S3 bucket) or a wildcard (`*`) to apply to all resources.
-
-        -   **6. Condition (Optional)**
+        - **6. Condition (Optional)**
             - **Definition:** Specifies the circumstances under which the policy is in effect. Conditions can be used to add granularity, such as allowing access only from a specific IP address range or during a certain time period.
+
+### IAM – Password Policy:
+
+- Strong passwords = higher security for your account
+- In AWS, you can setup a password policy:
+    - Set a minimum password length
+    - Require specific character types:
+        - including uppercase letters
+        - lowercase letters
+        - numbers
+        - non-alphanumeric characters
+- Allow all IAM users to change their own passwords
+- Require users to change their password after some time (password expiration)
+- Prevent password re-use
+
+<img src="images/iam/IAM-Edit-Password-Policy.PNG" width="auto" height="auto">
+<p>
+
+#### Multi Factor Authentication - MFA
+
+- Users have access to your account and can possibly change
+configurations or delete resources in your AWS account
+- **You want to protect your Root Accounts and IAM users**
+- MFA = password you know + security device you own
+
+<img src="images/iam/IAM-MFA.PNG" width="auto" height="auto">
+<p>
+
+- **Main benefit of MFA:** if a password is stolen or hacked, the account is not compromised
+
+#### MFA devices options in AWS
+
+Multi-Factor Authentication (MFA) adds an additional layer of security to your AWS account by requiring a second form of authentication, typically something you have, like a device, in addition to your password. There are various types of MFA devices you can use, such as:
+
+- **Virtual MFA Devices:** Applications like Google Authenticator and Authy, which generate time-based one-time passwords (TOTP) on your phone.
+
+- **Hardware MFA Devices:** Physical devices like YubiKey, which can be used for multiple IAM users, or other key fobs that generate time-based one-time passwords.
+
+<img src="images/iam/IAM-MFA-Device-1.PNG" width="auto" height="auto">
+<p>
+
+<img src="images/iam/IAM-MFA-Device-2.PNG" width="auto" height="auto">
+<p>
+
+These devices enhance the security of your AWS account by ensuring that even if your password is compromised, the attacker would still need the second factor to gain access.
