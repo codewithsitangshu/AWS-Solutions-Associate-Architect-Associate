@@ -213,7 +213,7 @@ These devices enhance the security of your AWS account by ensuring that even if 
 - Access Key ID ~= username
 - Secret Access Key ~= password
 
-<img src="images/iam/IAM-Fake-Access-key.PNG" width="auto" height="auto">
+<img src="images/iam/IAM-Fake-Access-key.png" width="auto" height="auto">
 <p>
 
 - Access key ID: AKIASK4E37PV4983d6C
