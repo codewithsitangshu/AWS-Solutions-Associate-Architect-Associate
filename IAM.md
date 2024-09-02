@@ -198,3 +198,136 @@ Multi-Factor Authentication (MFA) adds an additional layer of security to your A
 <p>
 
 These devices enhance the security of your AWS account by ensuring that even if your password is compromised, the attacker would still need the second factor to gain access.
+
+### How can users access AWS ?
+
+- To access AWS, you have three options:
+    1. **AWS Management Console:** This is a web-based interface that allows users to manage AWS services visually. It is secured by a combination of a password and Multi-Factor Authentication (MFA), ensuring an additional layer of security beyond just a password.
+    2. **AWS Command Line Interface (CLI):** The CLI allows users to interact with AWS services via command-line commands. This is particularly useful for automation and managing AWS resources programmatically. Access to the CLI is protected by Access Keys, which consist of an Access Key ID and a Secret Access Key. These keys are unique to each user and act as credentials that grant permission to access AWS services. The CLI is popular among developers and system administrators who need to perform complex tasks or automate workflows.
+    3. **AWS Software Development Kit (SDK):** The SDK is designed for integrating AWS services directly into your applications through code. It provides APIs that allow developers to interact with AWS services in a variety of programming languages, including Java, Python, and JavaScript. Like the CLI, the SDK requires Access Keys for authentication. These keys are managed by users and should be treated with the same level of security as a password, as they grant programmatic access to AWS resources.
+
+#### Access Keys:
+- Access Keys are generated through the AWS Console
+- Users manage their own access keys
+- **Users manage their own access keys**
+- Access Key ID ~= username
+- Secret Access Key ~= password
+
+<img src="images/iam/IAM-Fake-Access-key.PNG" width="auto" height="auto">
+<p>
+
+- Access key ID: AKIASK4E37PV4983d6C
+- Secret Access Key: AZPN3zojWozWCndIjhB0Unh8239a1bzbzO5fqqkZq
+- **Remember: don’t share your access keys**
+
+#### What’s the AWS CLI?
+
+- A tool that enables you to interact with AWS services using commands in your command-line shell
+- Direct access to the public APIs of AWS services
+- You can develop scripts to manage your resources
+- It’s open-source https://github.com/aws/aws-cli
+- Alternative to using AWS Management Console
+- Setup CLI https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+<img src="images/iam/IAM-CLI.PNG" width="auto" height="auto">
+<p>
+
+#### What’s the AWS SDK?
+
+<p>
+  <span style="display: inline-block; width: 60%;">
+    - AWS Software Development Kit (AWS SDK)<br>
+    - Language-specific APIs (set of libraries)<br>
+    - Enables you to access and manage AWS services programmatically<br>
+    - Embedded within your application<br>
+    - Supports<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js, C++)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- Mobile SDKs (Android, iOS, …)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- IoT Device SDKs (Embedded C, Arduino, …)<br>
+    - Example: AWS CLI is built on AWS SDK for Python
+  </span>
+  <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
+    <img src="images/iam/IAM-SDK.PNG" width="200"/>
+  </span>
+</p>
+
+#### AWS CloudShell
+
+AWS CloudShell is a browser-based shell environment available directly in the AWS Management Console. It provides a convenient way to securely manage, interact with, and automate AWS resources from your browser. Here are the key points:
+
+- **Pre-installed Tools:** `AWS CLI`, `Git`, and other essential tools are pre-installed, so you can start working immediately without any setup.
+- **Persistent Storage:** `1 GB` of persistent storage is available for your home directory, allowing you to store scripts and other files.
+- **Security:** Access to resources is securely managed via your IAM credentials, ensuring secure operations.
+- Avalibility AWS Regions for AWS CloudShell https://docs.aws.amazon.com/cloudshell/latest/userguide/supported-aws-regions.html
+
+AWS CloudShell is ideal for users who need a quick and easy way to manage AWS services without setting up a local environment.
+
+### IAM Roles for Services
+
+<p>
+  <span style="display: inline-block; width: 60%;">
+    - Some AWS service will need to perform actions on your behalf <br>
+    - To do so, we will assign <b>permissions</b> to AWS services with <b>IAM Roles</b><br>
+    - IAM roles provide permissions to entities you trust: AWS services, users, or applications. <br>
+    - Roles are designed to be assumed by anyone or anything that requires them, unlike users who are tied to a specific individual.<br>
+    - Common roles:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- EC2 Instance Roles<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- Lambda Function Roles<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- Roles for CloudFormation<br>
+  </span>
+  <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
+    <img src="images/iam/IAM-Role.PNG" width="250"/>
+  </span>
+</p>
+
+- Steps to Create a Custom IAM Role
+    - Navigate to IAM in AWS Console: Go to the IAM section in your AWS Management Console.
+    - **Create a Role:**
+        - Click on `Roles` in the navigation pane and select `Create role`.
+        - Choose the type of trusted entity (e.g., AWS service, another AWS account, web identity, etc.).
+    - **Select Use Case:** Depending on the trusted entity, select the specific use case, like allowing S3 access for an EC2 instance.
+
+    **Trusted entities**
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "ec2.amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+    ```
+    - **Attach Permissions:** Choose or create a policy that specifies the permissions this role will have. You can either attach an existing policy or create a new one.
+    - **Set Trust Relationship:** Define which entities can assume this role by setting up a trust policy.
+    - **Name the Role:** Give your role a descriptive name and add an optional description.
+    - **Review and Create:** Review the settings and create the role.
+
+
+You can watch a detailed guide on how to create a custom IAM role in this video:
+
+[![Create Custom IAM Role and Policy](https://img.youtube.com/vi/YourVideoID/0.jpg)](https://www.youtube.com/watch?v=2eu0YqbaOyo&t=130s)
+
+
+<img src="images/iam/IAM-Role-Permissions.PNG" width="auto" height="auto">
+<p>
+
+> **⚠️ Trust Policies:**
+>
+> Defines which principal entities (accounts, users, roles, federated users) can assume the role
+>
+> An IAM role is both an `identity` and a `resource` that supports `resource-based policies`.
+>
+> You must attach both a `trust policy` and an `identity-based` policy to an IAM role.
+>
+> The `IAM service supports only one type of resource-based policy` called a `role trust policy`, which is attached to an `IAM role`.
+
+> **⚠️ Roles:**
+>
+> Collection of policies for AWS services
+> 
+> If you are going to use an `IAM Service Role` with `Amazon EC2` or another AWS service that uses `Amazon EC2`, you must store the role in an `instance profile`. When you create an `IAM service role for EC2`, the role automatically has EC2 identified as a trusted entity.
