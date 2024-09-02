@@ -229,7 +229,7 @@ These devices enhance the security of your AWS account by ensuring that even if 
 - Alternative to using AWS Management Console
 - Setup CLI https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
-<img src="images/iam/IAM-CLI.PNG" width="auto" height="auto">
+<img src="images/iam/IAM-CLI.png" width="auto" height="auto">
 <p>
 
 #### What’s the AWS SDK?
@@ -247,7 +247,7 @@ These devices enhance the security of your AWS account by ensuring that even if 
     - Example: AWS CLI is built on AWS SDK for Python
   </span>
   <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
-    <img src="images/iam/IAM-SDK.PNG" width="200"/>
+    <img src="images/iam/IAM-SDK.png" width="200"/>
   </span>
 </p>
 
@@ -276,7 +276,7 @@ AWS CloudShell is ideal for users who need a quick and easy way to manage AWS se
     &nbsp;&nbsp;&nbsp;&nbsp;- Roles for CloudFormation<br>
   </span>
   <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
-    <img src="images/iam/IAM-Role.PNG" width="250"/>
+    <img src="images/iam/IAM-Role.png" width="250"/>
   </span>
 </p>
 
@@ -308,12 +308,10 @@ AWS CloudShell is ideal for users who need a quick and easy way to manage AWS se
     - **Review and Create:** Review the settings and create the role.
 
 
-You can watch a detailed guide on how to create a custom IAM role in this video:
-
-[![Create Custom IAM Role and Policy](https://img.youtube.com/vi/YourVideoID/0.jpg)](https://www.youtube.com/watch?v=2eu0YqbaOyo&t=130s)
+For a detailed walkthrough on creating a custom IAM role, you can watch this [YouTube tutorial](https://www.youtube.com/watch?v=2eu0YqbaOyo&t=130s).
 
 
-<img src="images/iam/IAM-Role-Permissions.PNG" width="auto" height="auto">
+<img src="images/iam/IAM-Role-Permissions.png" width="auto" height="auto">
 <p>
 
 > **⚠️ Trust Policies:**
