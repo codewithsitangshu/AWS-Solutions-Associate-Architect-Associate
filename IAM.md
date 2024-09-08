@@ -385,6 +385,71 @@ The `assume role` feature enhances security by limiting access to sensitive reso
 For a detailed walkthrough on creating a Assume IAM role, you can watch this [YouTube tutorial](https://www.youtube.com/watch?v=sFoMyPOPrSM&list=PL7iMyoQPMtAPVSnMZOpptxGoPqwK1piC6&index=7)
 
 
+### IAM Security Tools
+
+#### IAM Credentials Report (account-level)
+
+The IAM Credential Report is a valuable security tool provided by AWS that helps administrators audit the credentials of IAM users in their AWS environment. The report is a `CSV` file that contains comprehensive information about the status of passwords, access keys, and multi-factor authentication (MFA) for all IAM users in the account.
+
+##### Key Features:
+- **Password and Access Key Information:** It shows when each user’s password and access keys were last used, or if they have never been used. This helps identify inactive or unused credentials that may pose a security risk.
+- **MFA Status:** The report indicates whether MFA is enabled for each user. Enforcing MFA is crucial for enhancing account security by requiring a second layer of authentication.
+- **Key Rotation:** The report helps track when access keys were last rotated, which is a key practice in maintaining secure access to AWS resources.
+
+##### Use Cases:
+- **Security Audits:** The credential report helps administrators review user access and ensure credentials are up-to-date and secure.
+- **Compliance Monitoring:** It’s useful for ensuring that security policies, like MFA enforcement and key rotation, are being followed.
+- **Inactive Users:** You can quickly identify accounts with credentials that haven’t been used in a long time, allowing you to disable or delete them to reduce the attack surface.
+
+##### Best Practices:
+- **Regular Review:** Generate and review the credential report regularly to stay on top of potential security gaps.
+- **Enforce MFA:** Ensure all users, especially those with console access, have MFA enabled.
+- **Rotate Access Keys:** Encourage regular key rotation and disable inactive or unused access keys to minimize security risks.
+
+#### IAM Access Advisor (user-level)
+
+IAM Access Advisor is a tool that provides detailed insights into how IAM roles and users are using their permissions. It shows when each service was last accessed by a role or user, helping administrators assess whether the assigned permissions are necessary or overly broad.
+
+<img src="images/iam/IAM-Access-Advisor.PNG" width="auto" height="auto">
+<p>
+
+##### Key Features:
+- **Service Access Insights:** It displays the last accessed time for AWS services by each role or user. This can help identify permissions that are assigned but not being used.
+- **Policy Optimization:** If a user or role hasn’t accessed a particular service in a while, you can consider removing those permissions to adhere to the principle of least privilege.
+- **Cross-Account Access:** It shows which services are accessed across accounts, helping in monitoring and securing cross-account permissions.
+##### Use Cases:
+- **Rightsizing Permissions:** Access Advisor is a great tool for determining if users or roles have permissions they don’t need, allowing you to reduce unnecessary access.
+- **Auditing and Security Reviews:** It provides valuable information during security audits and helps ensure that permissions granted to users are actually being used.
+- **Policy Cleanup:** Use Access Advisor data to remove unused or unnecessary permissions, keeping your policies minimal and focused.
+##### Best Practices:
+- **Regular Permission Reviews:** Regularly use Access Advisor to review the permissions assigned to your users and roles, removing unnecessary or overly broad access.
+- **Least Privilege Enforcement:** Use Access Advisor’s insights to align with the principle of least privilege, ensuring users and roles only have access to what they need.
+- **Monitor Service Access:** Keep an eye on cross-account access to ensure that only the necessary services are accessed between accounts.
+
+
+### IAM Guidelines & Best Practices
+
+- **Limit Root Account Usage**: Only use the root account for administrative tasks that cannot be performed by any other user.
+- **One AWS User per Person**: Ensure each individual has their own unique AWS user account.
+- **Use Groups for Permissions**: Assign users to groups and manage permissions at the group level for easier access control.
+- **Enforce Strong Password Policies**: Implement a robust password policy to enhance security.
+- **Enable Multi-Factor Authentication (MFA)**: Require MFA for all users to add an extra layer of protection.
+- **Leverage IAM Roles for Permissions**: Use IAM roles to grant permissions instead of assigning them directly to users.
+- **Programmatic Access (CLI / SDK) via Access Keys**: Use access keys for programmatic access, but avoid using them for console logins.
+- **Regularly Audit Permissions**: Audit permissions of your account using IAM Credentials Report & IAM Access Advisor
+- **Never Share Credentials**: Avoid sharing IAM user credentials and access keys between individuals.
+
+### IAM Section – Summary
+- Users: mapped to a physical user, has a password for AWS Console
+- Groups: contains users only
+- Policies: JSON document that outlines permissions for users or groups
+- Roles: for EC2 instances or AWS services
+- Security: MFA + Password Policy
+- AWS CLI: manage your AWS services using the command-line
+- AWS SDK: manage your AWS services using a programming language
+- Access Keys: access AWS using the CLI or SDK
+- Audit: IAM Credential Reports & IAM Access Advisor
+
 <a href="README.md">
   <img src="images/Home.PNG" alt="Home" width="30" height="30">
 </a>
