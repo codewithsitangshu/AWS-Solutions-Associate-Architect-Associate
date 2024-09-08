@@ -244,7 +244,7 @@ These devices enhance the security of your AWS account by ensuring that even if 
     - IoT Device SDKs (Embedded C, Arduino, …)
 - Example: AWS CLI is built on AWS SDK for Python
 
-<img src="images/iam/IAM-SDK.png" width="auto" height="auto">
+<img src="images/iam/IAM-SDK.png" width="500" height="500">
 <p>
 
 #### AWS CloudShell
@@ -260,21 +260,16 @@ AWS CloudShell is ideal for users who need a quick and easy way to manage AWS se
 
 ### IAM Roles for Services
 
-<p>
-  <span style="display: inline-block; width: 60%;">
-    - Some AWS service will need to perform actions on your behalf <br>
-    - To do so, we will assign <b>permissions</b> to AWS services with <b>IAM Roles</b><br>
-    - IAM roles provide permissions to entities you trust: AWS services, users, or applications. <br>
-    - Roles are designed to be assumed by anyone or anything that requires them, unlike users who are tied to a specific individual.<br>
-    - Common roles:<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- EC2 Instance Roles<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- Lambda Function Roles<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- Roles for CloudFormation<br>
-  </span>
-  <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
-    <img src="images/iam/IAM-Role.png" width="250"/>
-  </span>
-</p>
+- Some AWS service will need to perform actions on your behalf <br>
+- To do so, we will assign <b>permissions</b> to AWS services with <b>IAM Roles</b><br>
+- IAM roles provide permissions to entities you trust: AWS services, users, or applications. <br>
+- Roles are designed to be assumed by anyone or anything that requires them, unlike users who are tied to a specific individual.<br>
+- Common roles:<br>
+    - EC2 Instance Roles<br>
+    - Lambda Function Roles<br>
+    - Roles for CloudFormation<br>
+
+<img src="images/iam/IAM-Role.PNG" width="500" height="500">
 
 - Steps to Create a Custom IAM Role
     - Navigate to IAM in AWS Console: Go to the IAM section in your AWS Management Console.
