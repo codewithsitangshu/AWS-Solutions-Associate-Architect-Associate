@@ -234,22 +234,18 @@ These devices enhance the security of your AWS account by ensuring that even if 
 
 #### What’s the AWS SDK?
 
+- AWS Software Development Kit (AWS SDK)
+- Language-specific APIs (set of libraries)
+- Enables you to access and manage AWS services programmatically
+- Embedded within your application
+- Supports
+    - SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js, C++)
+    - Mobile SDKs (Android, iOS, …)
+    - IoT Device SDKs (Embedded C, Arduino, …)
+- Example: AWS CLI is built on AWS SDK for Python
+
+<img src="images/iam/IAM-SDK.png" width="auto" height="auto">
 <p>
-  <span style="display: inline-block; width: 60%;">
-    - AWS Software Development Kit (AWS SDK)<br>
-    - Language-specific APIs (set of libraries)<br>
-    - Enables you to access and manage AWS services programmatically<br>
-    - Embedded within your application<br>
-    - Supports<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- SDKs (JavaScript, Python, PHP, .NET, Ruby, Java, Go, Node.js, C++)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- Mobile SDKs (Android, iOS, …)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;- IoT Device SDKs (Embedded C, Arduino, …)<br>
-    - Example: AWS CLI is built on AWS SDK for Python
-  </span>
-  <span style="display: inline-block; width: 35%; vertical-align: top; text-align: center;">
-    <img src="images/iam/IAM-SDK.png" width="200"/>
-  </span>
-</p>
 
 #### AWS CloudShell
 
