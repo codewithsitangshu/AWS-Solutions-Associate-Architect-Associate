@@ -299,7 +299,7 @@ AWS CloudShell is ideal for users who need a quick and easy way to manage AWS se
     - **Review and Create:** Review the settings and create the role.
 
 
-For a detailed walkthrough on creating a custom IAM role, you can watch this [YouTube tutorial](https://www.youtube.com/watch?v=2eu0YqbaOyo&t=130s).
+For a detailed walkthrough on creating a custom IAM role, you can watch this [YouTube tutorial](https://www.youtube.com/watch?v=2eu0YqbaOyo&t=130s)
 
 
 <img src="images/iam/IAM-Role-Permissions.png" width="auto" height="auto">
@@ -320,3 +320,66 @@ For a detailed walkthrough on creating a custom IAM role, you can watch this [Yo
 > Collection of policies for AWS services
 > 
 > If you are going to use an `IAM Service Role` with `Amazon EC2` or another AWS service that uses `Amazon EC2`, you must store the role in an `instance profile`. When you create an `IAM service role for EC2`, the role automatically has EC2 identified as a trusted entity.
+
+### IAM Assume Role
+
+In the AWS Identity and Access Management (IAM) ecosystem, one of the most powerful features is the ability to `assume a role`. This capability allows a user or a service to temporarily adopt permissions assigned to a different IAM role, which can significantly enhance security and flexibility within your AWS infrastructure.
+
+IAM roles are similar to IAM users in that they both define permissions for actions within your AWS environment. However, IAM roles are designed to be assumed by trusted entities, including users, applications, or services, rather than having permanent permissions like a typical user.
+
+For example, you might have multiple users within an AWS account that need temporary access to S3 resources. Instead of assigning S3 permissions to each user, you can create a role that grants S3 access and allow users to assume that role when needed.
+
+#### The Core Concept of Assume Role
+
+When a user or an AWS service assumes a role, they temporarily gain the permissions associated with that role. This enables flexible and temporary access control without needing to grant specific permissions directly to the user or service.
+
+<img src="images/iam/IAM-Assume-Role.png" width="auto" height="auto">
+<p>
+
+##### How Does It Work?
+
+1. **Creating the IAM Role**: 
+   - First, create a role with the necessary permissions. For example, you can create an IAM role that grants full access to S3.
+   - Assign an appropriate policy to the role. In our case, this could be an S3 Full Access policy.
+
+2. **Assume Role Mechanism**:
+   - The role and the user are initially independent; no permissions are assigned to the user directly.
+   - The user can assume the role by requesting to switch to it. Once the user assumes the role, they inherit the permissions defined by the role’s policy, allowing them to perform actions such as accessing S3.
+
+3. **Example**:
+   - Let’s consider a test user who doesn’t have any permissions assigned directly. 
+   - After creating an IAM role with S3 Full Access, we allow the test user to assume this role.
+   - Upon assuming the role, the test user will be able to perform S3 operations like listing, creating, or deleting buckets.
+
+##### Step-by-Step Guide to Assume a Role in AWS
+
+###### Step 1: Create a Test User
+- In the IAM console, create a user without assigning any permissions or groups.
+- This user will initially have no access to any AWS resources.
+
+###### Step 2: Create the IAM Role
+- Navigate to IAM and create a new role.
+- Attach the S3 Full Access policy to this role. This policy allows access to all S3-related operations.
+- Ensure that the role can be assumed by the account where the user exists.
+
+###### Step 3: Attach Role to User
+- In the IAM console, go to the user management section.
+- Create an inline policy that allows the test user to assume the S3 Full Access role using the `sts:AssumeRole` action.
+- Specify the ARN of the role in the policy.
+
+###### Step 4: Assume the Role
+- Using the AWS Management Console, the test user can now switch roles by following the URL generated for that role.
+- Once the role is assumed, the user will have temporary S3 access, and they can perform operations like listing and creating S3 buckets.
+
+###### Step 5: Switching Back
+- After completing the necessary operations, the user can switch back to their original role by logging out of the assumed role. This restores the user’s permissions to the original state, without the S3 access.
+
+
+##### Security Benefits of Assume Role
+
+The `assume role` feature enhances security by limiting access to sensitive resources. Instead of providing long-term access to resources (which could be misused or forgotten), you can use roles to grant temporary, fine-grained access. For example:
+
+- **Cross-Account Access**: You can use the assume role feature to grant permissions to users or services in different AWS accounts, enabling secure access without creating permanent trust relationships.
+- **Task-Specific Access**: Rather than giving broad permissions to users or services, you can create roles tailored to specific tasks or functions, ensuring that only the required permissions are granted.
+
+For a detailed walkthrough on creating a Assume IAM role, you can watch this [YouTube tutorial](https://www.youtube.com/watch?v=sFoMyPOPrSM&list=PL7iMyoQPMtAPVSnMZOpptxGoPqwK1piC6&index=7)
